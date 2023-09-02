@@ -1,29 +1,38 @@
 import './LandingPage.css';
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function LandingPage () {
 
+  const [text_userInput, setText_userInput] = useState('')
+  const handle_textarea = (event) => {
+    setText_userInput(event.target.value);
+  }
     const handle_test = async () => {
-        alert('okay');
+        // alert('okay');
+        const text = 'hello world';
+
+        console.log('text>>>>', text );
+
         try {
-            const response = await axios.post(
-                'https://play.ht/api/v2/tts',
-                {
-                  text: 'Hello World!',
-                  voice: 'larry',
-                },
-                {
-                  headers: {
-                    Authorization: 'Bearer c4b9285f106c3a4e5b4c6794f3a01d26',
-                    'X-USER-ID': 'o9X3lW0h8vNzDQSWRH7CTaRYwVl2',
-                    Accept: 'text/event-stream',
-                    'Content-Type': 'application/json',
-                  },
-                }
-              );
-          
-              console.log(response);
+            axios({
+                method: "post",
+                url: `http://localhost:5000/tts`,
+                data: {'text':text_userInput},
+              })
+              .then((response) => {
+                
+                console.log('response>>>>>', response.data);
+                
+              }).catch((error) => {
+                if (error.response) {
+                    alert(error);
+                    console.log("error~~~~~~~~~")
+                    console.log(error.response)
+                    console.log(error.response.status)
+                    console.log(error.response.headers)
+                  }
+              })
           } catch (error) {
             console.error('error:', error);
           }
@@ -32,7 +41,7 @@ function LandingPage () {
 
     return (
         <div id='main-board'>
-            <textarea id="user-input-text"></textarea>
+            <textarea id="user-input-text" value={text_userInput} onChange={handle_textarea}></textarea>
             <button onClick={handle_test}>test</button>
         </div>
     )
