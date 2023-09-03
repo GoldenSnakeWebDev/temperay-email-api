@@ -22,33 +22,6 @@ app.post('/tts', async (req, res) => {
     const text = req.body.text;
 
     console.log('text>>>', text);
-    // const options = {
-    //   method: 'GET',
-    //   hostname: 'play.ht',
-    //   port: null,
-    //   path: '/api/v2/cloned-voices',
-    //   headers: {
-    //     accept: 'application/json',
-    //     AUTHORIZATION: '0f918f0afad84b04aefc4edcbe1c4c28',
-    //     'X-USER-ID': 'XQQlngxmPodSfG0nWOTn7dyamJ53'
-    //   }
-    // };
-    
-    // const req = https.request(options, function (res) {
-    //   const chunks = [];
-    
-    //   res.on('data', function (chunk) {
-    //     chunks.push(chunk);
-    //   });
-    
-    //   res.on('end', function () {
-    //     const body = Buffer.concat(chunks);
-    //     console.log(body.toString());
-    //   });
-    // });
-    
-    // req.end();
-
     const options = {
         hostname: 'play.ht',
         path: '/api/v2/tts',
@@ -65,9 +38,36 @@ app.post('/tts', async (req, res) => {
         console.log(`statusCode: ${res.statusCode}`);
         
         res.on('data', d => {
-            console.log('data>>>>0', d);
+          const test = `{${d.toString()}}`;
+
+          console.log('test>>>>', test);
+
+          const temp = test.replace(/\n/g, ',');
+
+          console.log("temp>>>>", temp);
+
+          // const test1 = JSON.parse(test);
+          
+          // console.log('progress>>>', test1);
+
+          // console.log('event>>>>', test1.event);
+
+          setTimeout(() => {
+            
+          }, 2000);
+          
+          // if (event ==="completed") {
+          //   console.log('okay////????');
+          //   console.log('event>>>>', type_of_event);
+          //   console.log('url>>>', result.url);
+          // }
+          // console.log('test>>>>', d.toString());
           process.stdout.write(d);
         });
+
+        req.on('end', d => {
+          console.log('dddddd>>>>', d.toString());
+        })
       });
 
       req1.on('error', error => {
@@ -78,11 +78,8 @@ app.post('/tts', async (req, res) => {
         text: text,
         voice: 's3://voice-cloning-zero-shot/adf89144-5446-46d1-950e-b0389a993621/test/manifest.json'
       });
-      console.log('result >>>', data);
       req1.write(data);
       req1.end();
-
-
 });
 
 app.listen(port, () => {
