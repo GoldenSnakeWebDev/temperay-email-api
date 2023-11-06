@@ -17,8 +17,8 @@ function LandingPage () {
         try {
             axios({
                 method: "post",
-                url: `http://localhost:5000/tts`,
-                data: {'text':text_userInput},
+                url: `http://localhost:5000/register_email`,
+                data: {'email_addresss':text_userInput},
               })
               .then((response) => {
                 
@@ -42,7 +42,7 @@ function LandingPage () {
     return (
         <div id='main-board'>
             <textarea id="user-input-text" value={text_userInput} onChange={handle_textarea}></textarea>
-            <button onClick={handle_test}>test</button>
+            <button onClick={handle_test}>register</button>
         </div>
     )
 }

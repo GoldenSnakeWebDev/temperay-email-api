@@ -10,6 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "node-fetch": "^2.7.0"
+    "mysql": "^2.18.1",
+    "node-cron": "^3.0.2",
+    "node-fetch": "^2.7.0",
+    "node-temp-mail": "^2.0.0",
+    "temp-mail": "^2.0.0",
+    "temp-mail-api": "^1.1.1",
+    "tempmail.js": "^0.3.1"
   }
 }
