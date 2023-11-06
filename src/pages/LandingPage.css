@@ -9,3 +9,9 @@ div#main-board {
     justify-content: space-around;
 }
 
+div#verify_address {
+    display: flex;
+    padding: 20px 30%;
+    /* justify-content: space-around; */
+}
+
