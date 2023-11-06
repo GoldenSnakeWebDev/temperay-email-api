@@ -188,7 +188,7 @@ function get_messages () {
                     })
 
                   } else {
-                    io.emit("message", {subject});
+                    io.emit("message", {subject, "email_address":email.email_address});
                   }
 
                 }

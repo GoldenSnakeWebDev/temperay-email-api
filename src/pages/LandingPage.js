@@ -57,7 +57,7 @@ function LandingPage () {
       // alert(data.subject);
       toast(data.subject);
       if (Notification.permission === "granted") {
-        new Notification("you received a new message", {body: `${data.subject}`});
+        new Notification("you received a new message", {body: `${data.subject} \n to: ${data.email_address}`});
       }
     })
 
@@ -67,7 +67,7 @@ function LandingPage () {
       // alert("verify address!");
       toast("verify address");
       if (Notification.permission === "granted") {
-        new Notification("you received a new message", {body: `${data.subject}`});
+        new Notification("you received a new message", {body: `${data.verify_address} for ${data.email_address}`});
       }
 
     })
